@@ -65,55 +65,51 @@ public class Events {
         String sql = "INSERT INTO tbl_events (event_id, event_name, event_date, locations, descriptions, organizers) VALUES (?, ?, ?, ?, ?, ?)";
 
 
-        conf.addRecord(sql, eid, ename, edate, elocal, edes, eorga);
+        conf.addEvents(sql, eid, ename, edate, elocal, edes, eorga);
     }
     
     private void viewEvents() {
         
-        String qry = "SELECT * FROM tbl_employees";
+        String qry = "SELECT * FROM tbl_events";
         String[] hdrs = {"ID", "Event Name", "Event Date", "Location", "Description", "Organizer"};
         String[] clms = {"event_id", "event_name", "event_date", "locations", "descriptions", "organizers"};
 
         config conf = new config();
-        conf.viewRecords(qry, hdrs, clms);
+        conf.viewEvents(qry, hdrs, clms);
     }
     
-    private void updateEvents(){
-    
-        Scanner sc= new Scanner(System.in);
-        System.out.print("Enter the ID to Update: ");
-        int eid = sc.nextInt();
-        
-        System.out.print("Enter new First Name: ");
-        String ename = sc.next();
-        System.out.print("Enter new Last Name: ");
-        String edate = sc.next();
-        System.out.print("Enter new Email: ");
-        String elocal = sc.next();
-        System.out.print("Enter new Status: ");
-        String edes = sc.next();
-        System.out.print("Organizer Name:");
-        String eorga = sc.next();
+    private void updateEvents() {
 
-        String qry = "UPDATE tbl_events SET event_name = ?, event_date = ?, locations = ?, descriptions = ?, organizers = ? WHERE e_id = ?";
-        
-        config conf = new config();
-        conf.updateRecord(qry, ename, edate, elocal, edes, eorga, eid);
-        
-    }
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter the ID to Update: ");
+    String eid = sc.nextLine();
+
+    System.out.print("Enter New Event Name: ");
+    String ename = sc.nextLine();
+    System.out.print("Enter New Event Date: ");
+    String edate = sc.nextLine();
+    System.out.print("Enter New Location: ");
+    String elocal = sc.nextLine();
+    System.out.print("Enter New Description: ");
+    String edes = sc.nextLine();
+    System.out.print("Enter New Organizer Name: ");
+    String eorga = sc.nextLine();
+
+    String qry = "UPDATE tbl_events SET event_name = ?, event_date = ?, locations = ?, descriptions = ?, organizers = ? WHERE event_id = ?";
+
+    config conf = new config();
+    conf.updateEvents(qry, ename, edate, elocal, edes, eorga, eid); 
+}
     
-    private void deleteEvents(){
-        
-        Scanner sc= new Scanner(System.in);
-        System.out.print("Enter the ID to Delete: ");
-        int id = sc.nextInt();
-        
-        String qry = "DELETE FROM tbl_employees WHERE e_id = ?";
-        
-        config conf = new config();
-        conf.deleteRecord(qry, id);
-    
-    }
-    
-    
+    private void deleteEvents() {
+
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter the ID to Delete: ");
+    String id = sc.nextLine(); 
+
+    String qry = "DELETE FROM tbl_events WHERE event_id = ?";
+
+    config conf = new config();
+    conf.deleteEvents(qry, id);
+}
 }
